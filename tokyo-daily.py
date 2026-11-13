@@ -13,7 +13,7 @@ class RejectRedirects(HTTPRedirectHandler):
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "catalog"
     code = (sys.argv[2] if len(sys.argv) > 2 else "7203").strip().upper().removeprefix("TSE:")
-    if not re.fullmatch(r"[0-9][A-Z0-9]{2}[0-9]", code):
+    if not re.fullmatch(r"[0-9](?:[0-9]{3}|[0-9]{2}[ACDFGHJKLMNPRSTUWXY]|[ACDFGHJKLMNPRSTUWXY][0-9]{2})", code):
         raise SystemExit("Supply a four-character Tokyo Stock Exchange code, e.g. 7203.")
     symbol = "TSE:" + code
     if mode == "catalog":
